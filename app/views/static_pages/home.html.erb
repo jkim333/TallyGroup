@@ -1,0 +1,67 @@
+<main>
+    <table class="table">
+        <thead>
+            <tr class="table__row">
+                <th>Name</th>
+                <th>Code</th>
+                <th>Packs</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table__row">
+                <td>Vegemite Scroll</td>
+                <td>VS5</td>
+                <td>3 @ $6.99</td>
+            </tr>
+            <tr class="table__row">
+                <td>Vegemite Scroll</td>
+                <td>VS5</td>
+                <td>5 @ $8.99</td>
+            </tr>
+            <tr class="table__row">
+                <td>Blueberry Muffin</td>
+                <td>MB11</td>
+                <td>2 @ $9.95</td>
+            </tr>
+            <tr class="table__row">
+                <td>Blueberry Muffin</td>
+                <td>MB11</td>
+                <td>5 @ $16.95</td>
+            </tr>
+            <tr class="table__row">
+                <td>Blueberry Muffin</td>
+                <td>MB11</td>
+                <td>8 @ $24.95</td>
+            </tr>
+            <tr class="table__row">
+                <td>Croissant</td>
+                <td>CF</td>
+                <td>3 @ $5.95</td>
+            </tr>
+            <tr class="table__row">
+                <td>Croissant</td>
+                <td>CF</td>
+                <td>5 @ $9.95</td>
+            </tr>
+            <tr class="table__row">
+                <td>Croissant</td>
+                <td>CF</td>
+                <td>9 @ $16.99</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <%= form_with(url: "/", method: "get", class: "form") do |form| %>
+        <div class="form__group">
+            <%= form.label :items, "Choose an item:" %>
+            <%= form.select :items, [["Vegemite Scroll", "VS5"], ["Blueberry Muffin", "MB11"], ["Croissant", "CF"]], {}, { class: "form__input" } %>
+        </div>
+        <div class="form__group">
+            <%= form.label :number, "Number of items:" %>
+            <%= form.number_field :number, class: "form__input" %>
+        </div>
+        <%= form.submit "Submit", class: "form__btn" %>
+    <% end %>
+
+    <div id="output"></div>
+</main>
