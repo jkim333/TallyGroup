@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "StaticPages", type: :request do
+RSpec.describe "Bakeries", type: :request do
   describe "GET /" do
     it "returns http success" do
       get "/"
