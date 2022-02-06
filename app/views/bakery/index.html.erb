@@ -8,60 +8,30 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="table__row">
-                <td>Vegemite Scroll</td>
-                <td>VS5</td>
-                <td>3 @ $6.99</td>
-            </tr>
-            <tr class="table__row">
-                <td>Vegemite Scroll</td>
-                <td>VS5</td>
-                <td>5 @ $8.99</td>
-            </tr>
-            <tr class="table__row">
-                <td>Blueberry Muffin</td>
-                <td>MB11</td>
-                <td>2 @ $9.95</td>
-            </tr>
-            <tr class="table__row">
-                <td>Blueberry Muffin</td>
-                <td>MB11</td>
-                <td>5 @ $16.95</td>
-            </tr>
-            <tr class="table__row">
-                <td>Blueberry Muffin</td>
-                <td>MB11</td>
-                <td>8 @ $24.95</td>
-            </tr>
-            <tr class="table__row">
-                <td>Croissant</td>
-                <td>CF</td>
-                <td>3 @ $5.95</td>
-            </tr>
-            <tr class="table__row">
-                <td>Croissant</td>
-                <td>CF</td>
-                <td>5 @ $9.95</td>
-            </tr>
-            <tr class="table__row">
-                <td>Croissant</td>
-                <td>CF</td>
-                <td>9 @ $16.99</td>
-            </tr>
+            <% @items.each do |item| %>
+                <tr class="table__row">
+                    <td><%= item.name %></td>
+                    <td><%= item.code %></td>
+                    <td><%= item.pack_number %> @ <%= number_to_currency(item.pack_price / 100.0) %></td>
+                </tr>
+            <% end %>
         </tbody>
     </table>
 
-    <%= form_with(url: "/", method: "get", class: "form") do |form| %>
+    <%= form_with(url: ".", method: "post", class: "form") do |form| %>
         <div class="form__group">
             <%= form.label :items, "Choose an item:" %>
-            <%= form.select :items, [["Vegemite Scroll", "VS5"], ["Blueberry Muffin", "MB11"], ["Croissant", "CF"]], {}, { class: "form__input" } %>
+            <%= form.select :items, @items.distinct.pluck(:name, :code), {}, { class: "form__input" } %>
         </div>
         <div class="form__group">
             <%= form.label :number, "Number of items:" %>
-            <%= form.number_field :number, class: "form__input" %>
+            <%= form.number_field :number, class: "form__input", value: 0, min: 0 %>
         </div>
         <%= form.submit "Submit", class: "form__btn" %>
     <% end %>
 
-    <div id="output"></div>
+
+    <div class="output" id="output"></div>
+
+    <%= javascript_pack_tag 'main' %>
 </main>
